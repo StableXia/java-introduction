@@ -8,50 +8,6 @@ service Weather {
     operations: [GetCurrentTime]
 }
 
-@readonly
-operation GetCurrentTime {
-    output: GetCurrentTimeOutput
-}
-
-structure GetCurrentTimeOutput {
-    @required
-    time: Timestamp
-}
-
-@paginated(items: "items")
-@readonly
-operation ListCities {
-    input: ListCitiesInput,
-    output: ListCitiesOutput
-}
-
-structure ListCitiesInput {
-    nextToken: String,
-    pageSize: Integer
-}
-
-structure ListCitiesOutput {
-    nextToken: String,
-
-    @required
-    items: CitySummaries,
-}
-
-// CitySummaries is a list of CitySummary structures.
-list CitySummaries {
-    member: CitySummary
-}
-
-// CitySummary contains a reference to a City.
-@references([{resource: City}])
-structure CitySummary {
-    @required
-    cityId: CityId,
-
-    @required
-    name: String,
-}
-
 resource City {
     identifiers: {
         cityId: CityId
@@ -65,6 +21,9 @@ resource Forecast {
     identifiers: { cityId: CityId },
     read: GetForecast,
 }
+
+@pattern("^[A-Za-z0-9 ]+$")
+string CityId
 
 @readonly
 operation GetCity {
@@ -103,6 +62,50 @@ structure NoSuchResource {
     resourceType: String
 }
 
+@paginated(items: "items")
+@readonly
+operation ListCities {
+    input: ListCitiesInput,
+    output: ListCitiesOutput
+}
+
+structure ListCitiesInput {
+    nextToken: String,
+    pageSize: Integer
+}
+
+structure ListCitiesOutput {
+    nextToken: String,
+
+    @required
+    items: CitySummaries,
+}
+
+// CitySummaries is a list of CitySummary structures.
+list CitySummaries {
+    member: CitySummary
+}
+
+// CitySummary contains a reference to a City.
+@references([{resource: City}])
+structure CitySummary {
+    @required
+    cityId: CityId,
+
+    @required
+    name: String,
+}
+
+@readonly
+operation GetCurrentTime {
+    output: GetCurrentTimeOutput
+}
+
+structure GetCurrentTimeOutput {
+    @required
+    time: Timestamp
+}
+
 @readonly
 operation GetForecast {
     input: GetForecastInput,
@@ -119,5 +122,3 @@ structure GetForecastOutput {
     chanceOfRain: Float
 }
 
-@pattern("^[A-Za-z0-9 ]+$")
-string CityId
