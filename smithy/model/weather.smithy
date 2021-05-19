@@ -22,6 +22,7 @@ resource Forecast {
     read: GetForecast,
 }
 
+// "pattern" is a trait.
 @pattern("^[A-Za-z0-9 ]+$")
 string CityId
 
@@ -33,13 +34,15 @@ operation GetCity {
 }
 
 structure GetCityInput {
-    // "cityId" provides the identifier for the resource and has to be marked as required.
+    // "cityId" provides the identifier for the resource and
+    // has to be marked as required.
     @required
     cityId: CityId
 }
 
 structure GetCityOutput {
-    // "required" is used on output to indicate if the service will always provide a value for the member.
+    // "required" is used on output to indicate if the service
+    // will always provide a value for the member.
     @required
     name: String,
 
@@ -47,6 +50,7 @@ structure GetCityOutput {
     coordinates: CityCoordinates,
 }
 
+// This structure is nested within GetCityOutput.
 structure CityCoordinates {
     @required
     latitude: Float,
@@ -55,15 +59,18 @@ structure CityCoordinates {
     longitude: Float,
 }
 
-// "error" is a trait that is used to specialize a structure as an error.
+// "error" is a trait that is used to specialize
+// a structure as an error.
 @error("client")
 structure NoSuchResource {
     @required
     resourceType: String
 }
 
-@paginated(items: "items")
+// The paginated trait indicates that the operation may
+// return truncated results.
 @readonly
+@paginated(items: "items")
 operation ListCities {
     input: ListCitiesInput,
     output: ListCitiesOutput
@@ -112,7 +119,8 @@ operation GetForecast {
     output: GetForecastOutput
 }
 
-// "cityId" provides the only identifier for the resource since a Forecast doesn't have its own.
+// "cityId" provides the only identifier for the resource since
+// a Forecast doesn't have its own.
 structure GetForecastInput {
     @required
     cityId: CityId,
