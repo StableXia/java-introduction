@@ -1,4 +1,8 @@
-namespace example3.weather
+$version: "1.0"
+
+metadata CityId = "bar"
+
+namespace example.weather
 
 /// Provides weather forecasts.
 @paginated(inputToken: "nextToken", outputToken: "nextToken", pageSize: "pageSize")
@@ -127,3 +131,25 @@ structure GetForecastInput {
 structure GetForecastOutput {
     chanceOfRain: Float
 }
+
+@readonly
+@http(method: "GET", uri: "/cityName/{uuid}")
+operation GetCityName {
+    input: GetCityNameInput,
+    output: GetCityNameOutput
+}
+
+structure GetCityNameInput {
+    @required
+    @httpLabel
+    uuid: String
+}
+
+structure GetCityNameOutput {
+    @required
+    name: String,
+
+    data: String
+}
+
+

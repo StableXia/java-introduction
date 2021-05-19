@@ -1,10 +1,13 @@
 {
-    "metadata": {},
+    "metadata": {
+        "CityId": "bar"
+    },
     "operationShapeIds": [
-        "example3.weather#GetCity",
-        "example3.weather#GetCurrentTime",
-        "example3.weather#GetForecast",
-        "example3.weather#ListCities"
+        "example.weather#GetCity",
+        "example.weather#GetCityName",
+        "example.weather#GetCurrentTime",
+        "example.weather#GetForecast",
+        "example.weather#ListCities"
     ],
     "projection": {
         "abstract": false,
@@ -14,11 +17,11 @@
     },
     "projectionName": "source",
     "resourceShapeIds": [
-        "example3.weather#City",
-        "example3.weather#Forecast"
+        "example.weather#City",
+        "example.weather#Forecast"
     ],
     "serviceShapeIds": [
-        "example3.weather#Weather"
+        "example.weather#Weather"
     ],
     "traitDefNames": [
         "smithy.api#auth",
@@ -93,6 +96,8 @@
         "smithy.api#enum",
         "smithy.api#error",
         "smithy.api#externalDocumentation",
+        "smithy.api#http",
+        "smithy.api#httpLabel",
         "smithy.api#idRef",
         "smithy.api#length",
         "smithy.api#paginated",
@@ -106,6 +111,34 @@
         "smithy.api#uniqueItems",
         "smithy.api#unstable"
     ],
-    "validationEvents": [],
+    "validationEvents": [
+        {
+            "id": "UnreferencedShape",
+            "severity": "NOTE",
+            "shapeId": "example.weather#GetCityName",
+            "message": "The operation shape is not connected to from any service shape.",
+            "filename": "/Users/wenxia/Desktop/java-test/smithy/model/weather.smithy",
+            "line": 137,
+            "column": 1
+        },
+        {
+            "id": "UnreferencedShape",
+            "severity": "NOTE",
+            "shapeId": "example.weather#GetCityNameOutput",
+            "message": "The structure shape is not connected to from any service shape.",
+            "filename": "/Users/wenxia/Desktop/java-test/smithy/model/weather.smithy",
+            "line": 148,
+            "column": 1
+        },
+        {
+            "id": "UnreferencedShape",
+            "severity": "NOTE",
+            "shapeId": "example.weather#GetCityNameInput",
+            "message": "The structure shape is not connected to from any service shape.",
+            "filename": "/Users/wenxia/Desktop/java-test/smithy/model/weather.smithy",
+            "line": 142,
+            "column": 1
+        }
+    ],
     "version": "1.0"
 }
