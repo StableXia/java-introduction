@@ -1,4 +1,4 @@
-namespace example.weather
+namespace example3.weather
 
 /// Provides weather forecasts.
 @paginated(inputToken: "nextToken", outputToken: "nextToken", pageSize: "pageSize")
